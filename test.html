@@ -1,16 +1,39 @@
-<h1>Js</h1>
+<h1>Incubyte Test</h1>
 
-<head></head>
 <body>
-  
+    <script>
+        
+        function add(numbers) {
+            if (numbers === "") {
+                return 0;
+            }
+            // Default delimiter is a comma
+            let delimiter = ",";
+            // Check for custom delimiter
+            if (numbers.startsWith("//")) {
+                const delinIndx = numbers.indexOf('\n');
+                delimiter = numbers.substring(2, delinIndx);
+                numbers = numbers.substring(delinIndx + 1);
+            }
+            // Split numbers and convert to an array of numbers
+            const numArr = numbers.split(delimiter).map(num => Number(num));
+            // Check for negative numbers
+            const negNum = numArr.filter(num => num < 0);
+            if (negNum.length > 0) {
+                throw new Error(`Negative numbers not allowed: ${negNum.join(', ')}`);
+            }
+            // Return the sum of the numbers
+            return numArr.reduce((sum, num) => sum + num, 0);
+        }
+
+        // Test cases
+
+        console.log(add(""));              
+        console.log(add("1"));             
+        console.log(add("1,5"));           
+        console.log(add("//;\n1;2"));      
+        // console.log(add("//;\n1;-2"));       
+        console.log(add("//;\n1;-2;-3"));  
+
+    </script>
 </body>
-
-<script>
-
-  
-
-
-
-
-
-</script>
